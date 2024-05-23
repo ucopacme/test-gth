@@ -84,7 +84,7 @@ variable "uri_pattern_exceptions" {
   }
 
   validation {
-    condition     = length(setintersection(keys(var.uri_pattern_exceptions["AWSManagedRulesWordPressRuleSet"]), ["WordPressExploitableCommands_QUERYSTRING", "WordPressExploitablePaths_URIPATH"])) == length(keys(var.uri_pattern_exceptions["AWSManagedRulesWordPressRuleSet"]))
+    condition     = contains(keys(var.uri_pattern_exceptions), "AWSManagedRulesWordPressRuleSet") ? length(setintersection(keys(var.uri_pattern_exceptions["AWSManagedRulesWordPressRuleSet"]), ["WordPressExploitableCommands_QUERYSTRING", "WordPressExploitablePaths_URIPATH"])) == length(keys(var.uri_pattern_exceptions["AWSManagedRulesWordPressRuleSet"])) : true
     error_message = "A var.uri_pattern_exceptions AWSManagedRulesWordPressRuleSet rule name key is not valid. AWSManagedRulesWordPressRuleSet rule name keys must be in: WordPressExploitableCommands_QUERYSTRING, WordPressExploitablePaths_URIPATH."
   }
 }
