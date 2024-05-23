@@ -80,6 +80,11 @@ variable "uri_pattern_exceptions" {
 
   validation {
     condition     = length(setintersection(keys(var.uri_pattern_exceptions), ["AWSManagedRulesCommonRuleSet", "AWSManagedRulesAdminProtectionRuleSet", "AWSManagedRulesKnownBadInputsRuleSet", "AWSManagedRulesSQLiRuleSet", "AWSManagedRulesLinuxRuleSet", "AWSManagedRulesUnixRuleSet", "AWSManagedRulesWindowsRuleSet", "AWSManagedRulesPHPRuleSet", "AWSManagedRulesWordPressRuleSet"])) == length(keys(var.uri_pattern_exceptions))
-    error_message = "a var.uri_pattern_exceptions rule group key is not valid. Rule group keys must be in: AWSManagedRulesCommonRuleSet, AWSManagedRulesAdminProtectionRuleSet, AWSManagedRulesKnownBadInputsRuleSet, AWSManagedRulesSQLiRuleSet, AWSManagedRulesLinuxRuleSet, AWSManagedRulesUnixRuleSet, AWSManagedRulesWindowsRuleSet, AWSManagedRulesPHPRuleSet, AWSManagedRulesWordPressRuleSet."
+    error_message = "A var.uri_pattern_exceptions rule group key is not valid. Rule group keys must be in: AWSManagedRulesCommonRuleSet, AWSManagedRulesAdminProtectionRuleSet, AWSManagedRulesKnownBadInputsRuleSet, AWSManagedRulesSQLiRuleSet, AWSManagedRulesLinuxRuleSet, AWSManagedRulesUnixRuleSet, AWSManagedRulesWindowsRuleSet, AWSManagedRulesPHPRuleSet, AWSManagedRulesWordPressRuleSet."
+  }
+
+  validation {
+    condition     = length(setintersection(keys(var.uri_pattern_exceptions["AWSManagedRulesWordPressRuleSet"]), ["WordPressExploitableCommands_QUERYSTRING", "WordPressExploitablePaths_URIPATH"])) == length(keys(var.uri_pattern_exceptions["AWSManagedRulesWordPressRuleSet"]))
+    error_message = "A var.uri_pattern_exceptions AWSManagedRulesWordPressRuleSet rule name key is not valid. AWSManagedRulesWordPressRuleSet rule name keys must be in: WordPressExploitableCommands_QUERYSTRING, WordPressExploitablePaths_URIPATH."
   }
 }
